@@ -1,0 +1,2 @@
+Place your resume PDF here as: resume.pdf
+Download link in hero and resume section points to /resume.pdf
