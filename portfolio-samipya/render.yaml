@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: portfolio-samipya-api
+    runtime: node
+    rootDir: portfolio-samipya/server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      # Set these manually in Render dashboard (never commit secrets):
+      # MONGODB_URI, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD, CLIENT_URL
+    healthCheckPath: /api/health
+    autoDeploy: true

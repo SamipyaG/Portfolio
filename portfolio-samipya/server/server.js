@@ -23,9 +23,23 @@ const app = express();
 // ─── Security Middleware ────────────────────────────────────────────────────
 app.use(helmet());
 
+const ALLOWED_ORIGINS = [
+  'http://localhost:5173',
+  'http://localhost:4173',
+  'https://samipya.ghimire.com.np',
+  'https://www.samipya.ghimire.com.np',
+  // Also allow the raw Vercel deployment URL (set CLIENT_URL on Render)
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      // Allow non-browser requests (Postman, server-to-server, etc.)
+      if (!origin) return callback(null, true);
+      if (ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
+      callback(new Error(`CORS: origin ${origin} not allowed`));
+    },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
