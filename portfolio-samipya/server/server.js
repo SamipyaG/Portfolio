@@ -26,9 +26,9 @@ app.use(helmet());
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'http://localhost:4173',
-  'https://samipya.ghimire.com.np',
-  'https://www.samipya.ghimire.com.np',
-  // Also allow the raw Vercel deployment URL (set CLIENT_URL on Render)
+  'https://samipyaghimire.com.np',
+  'https://www.samipyaghimire.com.np',
+  'https://portfolio-samipya.vercel.app',
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
